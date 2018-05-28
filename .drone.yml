@@ -1,0 +1,19 @@
+---
+pipeline:
+  docker:
+    image: plugins/docker
+    repo: ncatelli/golang
+    tags: ${BASE_IMG_TAG}
+    build_args:
+      - BASE_IMG_TAG: ${BASE_IMG_TAG}
+    secrets: [ docker_username, docker_password ]
+    when:
+      branch: master
+      event: push
+
+matrix:
+  BASE_IMG_TAG:
+    - 1.9.6-alpine3.6
+    - 1.9.6-alpine3.7
+    - 1.10.1-alpine3.7
+    - 1.10.2-alpine3.7
